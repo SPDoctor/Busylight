@@ -8,11 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="C:\Users\BillA\.nuget\packages\com.plenom.busylightsdk\4.0.7\contentFiles\any\netcoreapp3.1\BusylightSDK.Documentation.chw" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="C:\Users\BillA\.nuget\packages\com.plenom.busylightsdk\4.0.7\contentFiles\any\netcoreapp3.1\BusylightSDK.Documentation.chm" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="com.plenom.BusylightSDK" Version="4.0.7" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
-    <PackageReference Include="Microsoft.SemanticKernel" Version="1.15.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
+    <PackageReference Include="Microsoft.SemanticKernel" Version="1.37.0" />
     <PackageReference Include="Microsoft.SemanticKernel.Plugins.Core" Version="1.15.0-alpha" />
-    <PackageReference Include="System.Memory.Data" Version="8.0.0" />
+    <PackageReference Include="System.Memory.Data" Version="9.0.2" />
   </ItemGroup>
 
 </Project>

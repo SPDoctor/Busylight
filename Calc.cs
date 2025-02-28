@@ -52,11 +52,11 @@ public class CalcPlugin
 
   [KernelFunction, Description("Take the nth root of a number")]
   public static double Root(
-      [Description("The number of which to take the root")] double number1,
-      [Description("n")] double number2
+     [Description("The number of which to take the root")] double number1,
+     [Description("n")] double number2
   )
   {
-    return Math.Pow(number1, number2);
+    return Math.Pow(number1, 1.0 / number2);
   }
 
   //[KernelFunction, Description("Take the log of a number")]
