@@ -8,22 +8,30 @@ using Plugins;
 using Filters;
 
 var builder = Kernel.CreateBuilder();
-string deploymentName = Environment.GetEnvironmentVariable("deploymentname", EnvironmentVariableTarget.User)!;
+//string deploymentName = Environment.GetEnvironmentVariable("deploymentname", EnvironmentVariableTarget.User)!;
+string deploymentName = "gpt4";
 string endpoint = Environment.GetEnvironmentVariable("endpoint", EnvironmentVariableTarget.User)!;
 string apiKey = Environment.GetEnvironmentVariable("apiKey", EnvironmentVariableTarget.User)!;
 
-builder.Services.AddAzureOpenAIChatCompletion("gpt4", endpoint, apiKey);
+builder.Services.AddAzureOpenAIChatCompletion(deploymentName, endpoint, apiKey);
 builder.Plugins.AddFromType<CalcPlugin>();
 builder.Plugins.AddFromType<LightPlugin>();
 builder.Plugins.AddFromType<TimePlugin>();
 builder.Plugins.AddFromType<ModelsPlugin>();
+//BingPlugin bingPlugin = new();
+//builder.Plugins.AddFromType<BingPlugin>();
+
 //builder.Services.AddLogging(loggingBuilder => loggingBuilder.AddConsole().SetMinimumLevel(LogLevel.Information));
 var kernel = builder.Build();
 kernel.FunctionInvocationFilters.Add(new LogFilter());
 
 // Create chat history
 ChatHistory history = [];
-history.AddSystemMessage("You are a helpful assistant. If the user doesn't provide enough information for you to complete a task, you will keep asking questions until you have enough information to complete the task. Please explain your reasoning with response.");
+history.AddSystemMessage(@"You are a helpful assistant. 
+You are not restricted to using the provided plugins, and can use information from your training.
+Please explain your reasoning with the response.");
+//If the user doesn't provide enough information for you to complete a task, 
+//you will keep asking questions until you have enough information to complete the task.
 
 // Get chat completion service
 var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
@@ -31,7 +39,6 @@ var chatCompletionService = kernel.GetRequiredService<IChatCompletionService>();
 // enable auto function calling
 OpenAIPromptExecutionSettings openAIPromptExecutionSettings = new()
 {
-  //ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions,
   FunctionChoiceBehavior = FunctionChoiceBehavior.Auto()
 };
 

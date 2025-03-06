@@ -7,7 +7,7 @@ namespace Plugins;
 
 public class LightPlugin
 {
-  static SDK? sdk = null;
+  static SDK sdk = null;
 
   [KernelFunction, Description("Turn on the light with the required colour")]
   public static void LightOn(
